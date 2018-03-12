@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pceti.a8c1.cetitoolapp.Activitys.AddNoticia">
+
+
+    <ImageButton
+        android:id="@+id/ib_Image_Add_Noticias"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/addimage_noticias"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="68dp" />
+
+    <EditText
+        android:id="@+id/etTitulo_Add_Noticias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ib_Image_Add_Noticias"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Titulo"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_Aceptar_Add_Noticias"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/spinner_Add_Noticias"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/login_rect_boton"
+        android:text="Publicar"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/etDescrip_Add_Noticias"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etTitulo_Add_Noticias"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Descripción"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo:"
+        android:layout_below="@+id/etDescrip_Add_Noticias"/>
+
+    <Spinner
+        android:id="@+id/spinner_Add_Noticias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="12dp" />
+</RelativeLayout>

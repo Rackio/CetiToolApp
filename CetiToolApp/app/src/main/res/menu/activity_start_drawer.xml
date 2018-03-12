@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:id="@+id/menu_inicio"
+            android:icon="@drawable/ic_inicio"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/menu_noticias"
+            android:icon="@drawable/ic_noticias"
+            android:title="Noticias" />
+        <item
+            android:id="@+id/menu_eventos"
+            android:icon="@drawable/ic_eventos"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/menu_chat"
+            android:icon="@drawable/ic_cha"
+            android:title="Chat" />
+        <item
+            android:title="Mapa"
+            android:icon="@drawable/ic_mapa"
+            android:id="@+id/menu_mapa"/>
+    </group>
+
+    <item android:title="Tú">
+        <menu>
+            <item
+                android:id="@+id/menu_perfil"
+                android:icon="@drawable/ic_perfil"
+                android:title="Perfil" />
+            <item
+                android:id="@+id/menu_horario"
+                android:icon="@drawable/ic_horario"
+                android:title="Horario" />
+            <item
+                android:id="@+id/menu_cali"
+                android:icon="@drawable/ic_calificaciones"
+                android:title="Calificaciones"/>
+        </menu>
+    </item>
+
+
+    <item android:title="Opciones">
+        <menu>
+            <item
+                android:title="Contacto"
+                android:icon="@drawable/ic_contacto"
+                android:id="@+id/menu_contacto"/>
+            <item
+                android:id="@+id/menu_salir"
+                android:icon="@drawable/ic_exit"
+                android:title="Cerrar Sesión"/>
+        </menu>
+    </item>
+
+</menu>

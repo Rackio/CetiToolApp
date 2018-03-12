@@ -1,0 +1,142 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pceti.a8c1.cetitoolapp.Fragments.Horario.AgregarHorarioFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView14"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:hint="Materia"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText3"
+            android:layout_below="@+id/editText3"
+            android:layout_marginTop="21dp"
+            android:ems="10"
+            android:hint="Profesor"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            android:text="Selecciona el día" />
+
+        <Button
+            android:id="@+id/btn_agregar_horario"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/textView8"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_date_range_black_24dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btn_incio_horario"
+            android:layout_below="@+id/btn_agregar_horario"
+            android:layout_marginTop="33dp"
+            android:text="Inicio" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView9"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignEnd="@+id/editText4"
+            android:text="Fin" />
+
+        <Button
+            android:id="@+id/btn_incio_horario"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/textView9"
+            android:layout_toStartOf="@+id/tv_inicio_horario"
+            android:background="@drawable/ic_add_alarm_start" />
+
+        <Button
+            android:id="@+id/btn_fin_horario"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/tv_inicio_horario"
+            android:layout_alignStart="@+id/textView10"
+            android:background="@drawable/ic_add_alarm_finish" />
+
+        <Button
+            android:id="@+id/btn_aceptar_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView8"
+            android:layout_below="@+id/tv_fin_horario"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/login_rect_boton"
+            android:text="Aceptar" />
+
+        <TextView
+            android:id="@+id/tv_inicio_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_incio_horario"
+            android:layout_marginTop="21dp"
+            android:layout_toStartOf="@+id/textView8"
+            android:text="Inicio"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_fin_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_inicio_horario"
+            android:layout_alignBottom="@+id/tv_inicio_horario"
+            android:layout_toStartOf="@+id/btn_fin_horario"
+            android:text="Fin"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_fecha_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView10"
+            android:layout_centerHorizontal="true"
+            android:text="Día"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Agrega una nueva hora "
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</FrameLayout>
