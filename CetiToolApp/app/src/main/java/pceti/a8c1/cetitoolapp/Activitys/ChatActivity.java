@@ -98,10 +98,10 @@ private String sender;
         rvMensajes.setAdapter(adapter);
         rvMensajes.setHasFixedSize(true);
        receiver= getIntent().getExtras().getString("receiveruid");
-        sender= getIntent().getExtras().getString("senderui");
+        sender = variables.ARG_RECEIVER_UID;
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        room_type_1 = "CKCpdeYA5kNERETLIaA7Z0JUP4e2" + "_" + receiver;
-        room_type_2 = receiver + "_" + "CKCpdeYA5kNERETLIaA7Z0JUP4e2";
+        room_type_1 = sender+ "_" + receiver;
+        room_type_2 = receiver + "_" + sender;
 
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +157,7 @@ private String sender;
             }
         });
 
- databaseReference.getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+ databaseReference.getRef().child(room_type_1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(room_type_1)) {
@@ -166,16 +166,6 @@ private String sender;
                             .child(room_type_1).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                            String PEPE1= String.valueOf(dataSnapshot.child("image").getValue());
-                           String PEPE2= String.valueOf(dataSnapshot.child("mensaje").getValue());
-                            String PEPE3= String.valueOf(dataSnapshot.child("nombre").getValue());
-                            String PEPE4= String.valueOf(dataSnapshot.child("type_mensaje").getValue());
-                            String PEPE5= String.valueOf(dataSnapshot.child("urlFoto").getValue());
-                            Toast.makeText(getApplicationContext(),PEPE1 , Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(),PEPE2 , Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(),PEPE3 , Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(),PEPE4 , Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(),PEPE5 , Toast.LENGTH_SHORT).show();
                              MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
                 adapter.addMensaje(m);
                         }
@@ -201,8 +191,8 @@ private String sender;
                         }
                     });
                 } else if (dataSnapshot.hasChild(room_type_2)) {
-                    FirebaseDatabase.getInstance()
-                            .getReference()
+                    database
+                            .getReference(variables.ARG_CHAT_ROOMS)
                             .child(room_type_2).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {

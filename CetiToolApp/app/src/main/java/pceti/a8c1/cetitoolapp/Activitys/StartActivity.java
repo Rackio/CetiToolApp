@@ -97,6 +97,8 @@ public class StartActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                String uid=user.getUid().toString();
+                variables.ARG_RECEIVER_UID=uid;
                 if (user == null) {
                     LoginScreen();
                 }else{
@@ -213,6 +215,7 @@ public class StartActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.Start_Layout, new MapaFragment()).commit();
 
         } else if (id == R.id.menu_salir) {
+            variables.ARG_RECEIVER_UID = "";
             FirebaseAuth.getInstance().signOut();
             LoginManager.getInstance().logOut();
             LoginScreen();

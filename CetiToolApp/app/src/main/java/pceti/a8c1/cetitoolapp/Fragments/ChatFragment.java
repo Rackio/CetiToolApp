@@ -34,6 +34,7 @@ import pceti.a8c1.cetitoolapp.Activitys.StartActivity;
 import pceti.a8c1.cetitoolapp.Modelos.Noticias;
 import pceti.a8c1.cetitoolapp.Modelos.Users;
 import pceti.a8c1.cetitoolapp.R;
+import pceti.a8c1.cetitoolapp.constantes.variables;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -44,6 +45,7 @@ public class ChatFragment extends Fragment {
     private RecyclerView UsersLista;
     private DatabaseReference mDatabaseUsers;
     private FirebaseAuth mAuth;
+    private String Sender;
     private FirebaseAuth firebaseAuth;
     private String NOMBRE_USUARIO;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -59,7 +61,28 @@ public class ChatFragment extends Fragment {
         UsersLista= view.findViewById(R.id.UsersChatLista);
         UsersLista.setHasFixedSize(true);
         UsersLista.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    LoginScreen();
+                }else{
+                    sender = variables.ARG_RECEIVER_UID;
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+                    mDatabase.child(firebaseAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Toast.makeText(getApplicationContext(),"Id de usuario"+ sender, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                }
+            }
+        };
         return view;
     }
 

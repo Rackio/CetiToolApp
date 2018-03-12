@@ -6,7 +6,7 @@ package pceti.a8c1.cetitoolapp.constantes;
 
 public class variables {
     public static final String ARG_RECEIVER ="receiver";
-    public static final String ARG_RECEIVER_UID = "receiver_uid";
+    public static String ARG_RECEIVER_UID ;
     public static final String ARG_CHAT_ROOMS = "chat_rooms";
     public static final String ARG_FIREBASE_TOKEN = "firebaseToken";
 
