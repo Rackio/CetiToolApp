@@ -1,5 +1,7 @@
 package pceti.a8c1.cetitoolapp.Entidades;
 
+import java.util.Map;
+
 /**
  * Created by CesarAM on 04/03/2018.
  */
@@ -7,8 +9,12 @@ package pceti.a8c1.cetitoolapp.Entidades;
 public class MensajeRecibir extends Mensaje {
     private Long hora;
 
+    public MensajeRecibir() {
+    }
 
-
+    public MensajeRecibir(Long hora) {
+        this.hora = hora;
+    }
 
     public MensajeRecibir(String mensaje, String urlFoto, String nombre, String image, String type_mensaje, Long hora) {
         super(mensaje, urlFoto, nombre, image, type_mensaje);

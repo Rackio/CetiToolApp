@@ -44,6 +44,7 @@ public class ChatFragment extends Fragment {
     private RecyclerView UsersLista;
     private DatabaseReference mDatabaseUsers;
     private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
     private String NOMBRE_USUARIO;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private DatabaseReference mDatabase;
@@ -58,33 +59,7 @@ public class ChatFragment extends Fragment {
         UsersLista= view.findViewById(R.id.UsersChatLista);
         UsersLista.setHasFixedSize(true);
         UsersLista.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        firebaseAuthListener  = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    LoginScreen();
-                }else{
-                    sender = firebaseAuth.getCurrentUser().getUid().toString();
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-                    mDatabase.child(firebaseAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            sender =String.valueOf(dataSnapshot.child("uid").getValue());
-                            Toast.makeText(getApplicationContext(),"Id de usuario"+ sender, Toast.LENGTH_SHORT).show();
 
-
-                        }
-
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-        };
         return view;
     }
 
@@ -115,7 +90,6 @@ public class ChatFragment extends Fragment {
                         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                         Toast.makeText(getApplicationContext(), sender, Toast.LENGTH_SHORT).show();
                         intent.putExtra("receiveruid", post1_key);
-                        intent.putExtra("senderuid", sender);
                         startActivity(intent);
                     }
                 });
@@ -149,4 +123,6 @@ public class ChatFragment extends Fragment {
     private void LoginScreen() {
 
     }
+
+
 }

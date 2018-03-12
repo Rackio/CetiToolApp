@@ -44,6 +44,8 @@ import pceti.a8c1.cetitoolapp.Modelos.Chat;
 import pceti.a8c1.cetitoolapp.R;
 import pceti.a8c1.cetitoolapp.constantes.variables;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class StartActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,7 +61,7 @@ public class StartActivity extends AppCompatActivity
     ImageView slideImage;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-
+   private  String Sender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +100,7 @@ public class StartActivity extends AppCompatActivity
                 if (user == null) {
                     LoginScreen();
                 }else{
-
+                     Sender = user.getUid();
                     final String email = user.getEmail();
                     mStorage = FirebaseStorage.getInstance().getReference();
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -196,7 +198,9 @@ public class StartActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Presionó eventos", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.menu_chat) {
-
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+            Toast.makeText(getApplicationContext(), Sender, Toast.LENGTH_SHORT).show();
+            intent.putExtra("senderuid", Sender);
             fragmentManager.beginTransaction().replace(R.id.Start_Layout, new ChatFragment()).commit();
 
         } else if (id == R.id.menu_perfil) {

@@ -7,13 +7,13 @@ import java.util.Map;
  */
 
 public class Mensaje {
-    public String mensaje;
-    public String urlFoto;
-    public String nombre;
-    public String image;
-    public String type_mensaje;
+    private String mensaje;
+    private String urlFoto;
+    private String nombre;
+    private String image;
+    private String type_mensaje;
 
-    public Mensaje(String mensaje, String nombre, String image, String type_mensaje, Map hora) {
+    public Mensaje() {
     }
 
     public Mensaje(String mensaje, String nombre, String image, String type_mensaje) {

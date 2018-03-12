@@ -9,12 +9,18 @@ import java.util.Map;
  */
 
 public class MensajeEnviar extends Mensaje {
+
     private Map hora;
 
+    public MensajeEnviar() {
+    }
 
+    public MensajeEnviar(Map hora) {
+        this.hora = hora;
+    }
 
-    public MensajeEnviar(String mensaje, String nombre, String image, Map hora, String type_mensaje) {
-        super(mensaje, nombre, image, type_mensaje, hora);
+    public MensajeEnviar(String mensaje, String nombre, String image, String type_mensaje, Map hora) {
+        super(mensaje, nombre, image, type_mensaje);
         this.hora = hora;
     }
 

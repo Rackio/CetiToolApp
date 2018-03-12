@@ -100,8 +100,8 @@ private String sender;
        receiver= getIntent().getExtras().getString("receiveruid");
         sender= getIntent().getExtras().getString("senderui");
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        room_type_1 = sender + "_" + receiver;
-        room_type_2 = receiver + "_" + sender;
+        room_type_1 = "CKCpdeYA5kNERETLIaA7Z0JUP4e2" + "_" + receiver;
+        room_type_2 = receiver + "_" + "CKCpdeYA5kNERETLIaA7Z0JUP4e2";
 
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
@@ -112,8 +112,37 @@ private String sender;
                     Toast.makeText(getApplicationContext(), room_type_1, Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), room_type_2, Toast.LENGTH_SHORT).show();
                 }else{
-                    new Mensaje(txtMensaje.getText().toString(), fotoPerfilCadena, NOMBRE_USUARIO,"1", ServerValue.TIMESTAMP);
-                    txtMensaje.setText("");
+                    databaseReference.getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.hasChild(room_type_1)) {
+
+                                    databaseReference.child(room_type_1).push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), fotoPerfilCadena,  NOMBRE_USUARIO, fotoPerfilCadena, "1",ServerValue.TIMESTAMP));
+                                    txtMensaje.setText("");
+
+                                } else if (dataSnapshot.hasChild(room_type_2)) {
+                                    databaseReference.child(room_type_2).push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), fotoPerfilCadena,  NOMBRE_USUARIO, fotoPerfilCadena, "1",ServerValue.TIMESTAMP));
+                                    txtMensaje.setText("");
+
+                                } else {
+
+                                    databaseReference.child(room_type_1).push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), fotoPerfilCadena,  NOMBRE_USUARIO, fotoPerfilCadena, "1",ServerValue.TIMESTAMP));
+                                    txtMensaje.setText("");
+
+
+                                }
+
+
+                            }
+
+
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
                 }
             }
         });
@@ -128,16 +157,25 @@ private String sender;
             }
         });
 
- databaseReference.child(variables.ARG_CHAT_ROOMS).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+ databaseReference.getRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(room_type_1)) {
-                    FirebaseDatabase.getInstance()
-                            .getReference()
-                            .child(variables.ARG_CHAT_ROOMS)
+                    database
+                            .getReference(variables.ARG_CHAT_ROOMS)
                             .child(room_type_1).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            String PEPE1= String.valueOf(dataSnapshot.child("image").getValue());
+                           String PEPE2= String.valueOf(dataSnapshot.child("mensaje").getValue());
+                            String PEPE3= String.valueOf(dataSnapshot.child("nombre").getValue());
+                            String PEPE4= String.valueOf(dataSnapshot.child("type_mensaje").getValue());
+                            String PEPE5= String.valueOf(dataSnapshot.child("urlFoto").getValue());
+                            Toast.makeText(getApplicationContext(),PEPE1 , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),PEPE2 , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),PEPE3 , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),PEPE4 , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),PEPE5 , Toast.LENGTH_SHORT).show();
                              MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
                 adapter.addMensaje(m);
                         }
@@ -165,7 +203,6 @@ private String sender;
                 } else if (dataSnapshot.hasChild(room_type_2)) {
                     FirebaseDatabase.getInstance()
                             .getReference()
-                            .child(variables.ARG_CHAT_ROOMS)
                             .child(room_type_2).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -233,28 +270,32 @@ private String sender;
 
     protected void onActivityResult(final int requestCode, final int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        databaseReference.child(variables.ARG_CHAT_ROOMS).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.getRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(room_type_1)) {
+                if (requestCode == PHOTO_SEND && resultCode == RESULT_OK) {
+                    if (dataSnapshot.hasChild(room_type_1)) {
 
-                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+" te ha enviado una foto","",NOMBRE_USUARIO,fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
-                        databaseReference.child(variables.ARG_CHAT_ROOMS).child(room_type_1).setValue(m);
+                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO + txtMensaje, "", NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                        databaseReference.child(room_type_1).push().setValue(m);
 
-                } else if (dataSnapshot.hasChild(room_type_2)) {
+                    } else if (dataSnapshot.hasChild(room_type_2)) {
 
-                    MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+" te ha enviado una foto","",NOMBRE_USUARIO,fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
-                    databaseReference.child(variables.ARG_CHAT_ROOMS).child(room_type_2).setValue(m);
+                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO + txtMensaje, "", NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                        databaseReference.child(room_type_2).push().setValue(m);
 
-                } else {
+                    } else {
 
-                    MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+" te ha enviado una foto","",NOMBRE_USUARIO,fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
-                    databaseReference.child(variables.ARG_CHAT_ROOMS).child(room_type_1).setValue(m);
+                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO + txtMensaje, "", NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                        databaseReference.child(variables.ARG_CHAT_ROOMS).child(room_type_1).push().setValue(m);
 
+
+                    }
+
+
+                } else if (requestCode == PHOTO_PERFIL && resultCode == RESULT_OK) {
 
                 }
-
-
             }
 
             @Override
@@ -344,4 +385,5 @@ private String sender;
 
 
     }
+
 }
